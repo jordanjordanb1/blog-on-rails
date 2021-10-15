@@ -8,6 +8,8 @@ module.exports = {
         '../..',
         'app/javascript/components'
       ),
+      '@/hooks': pathResolve(__dirname, '../..', 'app/javascript/hooks'),
+      '@axios': pathResolve(__dirname, '../../app/javascript/setup/axios'),
     },
   },
 }

@@ -1,7 +1,10 @@
-const { environment } = require('@rails/webpacker')
+const { webpackConfig, merge } = require('@rails/webpacker')
 const aliases = require('./alias')
 
-// Add aliases to webpack
-environment.config.merge(aliases)
+const commonOptions = {
+  resolve: {
+    extensions: ['.css', '.ts', '.tsx'],
+  },
+}
 
-module.exports = environment
+module.exports = merge({}, webpackConfig, aliases, commonOptions)

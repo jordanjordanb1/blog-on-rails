@@ -8,14 +8,16 @@
     "moduleResolution": "node",
     "sourceMap": true,
     "target": "es2015",
-    "jsx": "preserve",
+    "jsx": "react-jsxdev",
     "noEmit": true,
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@/components/*": ["app/javascript/components/*"]
+      "@/components/*": ["app/javascript/components/*"],
+      "@/hooks/*": ["app/javascript/hooks/*"],
+      "@axios": ["app/javascript/setup/axios.ts"]
     },
     "importHelpers": true,
     "resolveJsonModule": true,

@@ -11,37 +11,42 @@
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
-    "@rails/webpacker": "5.4.3",
-    "@types/react": "^17.0.29",
-    "@types/react-dom": "^17.0.9",
+    "@rails/webpacker": "^6.0.0-rc.5",
+    "axios": "^0.23.0",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-router": "^5.2.1",
-    "react-router-dom": "^5.3.0",
+    "react-on-rails": "12.4.0",
     "tslib": "^2.3.1",
     "turbolinks": "^5.2.0",
     "typescript": "^4.4.4",
-    "webpack": "^4.46.0",
-    "webpack-cli": "^3.3.12"
+    "webpack": "^5.58.2",
+    "webpack-cli": "^4.9.0"
   },
   "version": "0.1.0",
   "devDependencies": {
     "@babel/core": "^7.15.8",
     "@types/babel__core": "^7.1.16",
+    "@types/concurrently": "^6.3.0",
     "@types/prettier": "^2.4.1",
-    "@types/prop-types": "^15.7.4",
+    "@types/react": "^17.0.29",
+    "@types/react-dom": "^17.0.9",
     "@types/react-router": "^5.1.17",
     "@types/react-router-dom": "^5.3.1",
     "@types/turbolinks": "^5.2.0",
     "@types/webpack": "^5.28.0",
     "@types/webpack-dev-server": "^3.11.6",
     "babel-plugin-module-resolver": "^4.1.0",
+    "concurrently": "^6.3.0",
     "eslint-import-resolver-webpack": "^0.13.1",
+    "fork-ts-checker-webpack-plugin": "^6.3.4",
     "prettier": "^2.4.1",
-    "webpack-dev-server": "^3"
+    "webpack-dev-server": "^4.3.1"
   },
   "scripts": {
-    "start:dev": "rails s --binding=0.0.0.0"
+    "start:dev": "NODE_ENV=development foreman start -f Procfile.dev",
+    "start:dev-webpacker": "NODE_ENV=development concurrently \"yarn run start:rails\" \"yarn run start:webpack-dev\"",
+    "start:rails": "rails s --binding=0.0.0.0",
+    "start:webpack-dev": "WEBPACKER_DEV_SERVER_HOST=0.0.0.0 ./bin/webpack-dev-server"
   }
 }
