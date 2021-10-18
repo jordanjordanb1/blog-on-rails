@@ -37,7 +37,6 @@
     "@types/webpack": "^5.28.0",
     "@types/webpack-dev-server": "^3.11.6",
     "babel-plugin-module-resolver": "^4.1.0",
-    "concurrently": "^6.3.0",
     "eslint-import-resolver-webpack": "^0.13.1",
     "fork-ts-checker-webpack-plugin": "^6.3.4",
     "prettier": "^2.4.1",
@@ -45,8 +44,6 @@
   },
   "scripts": {
     "start:dev": "NODE_ENV=development foreman start -f Procfile.dev",
-    "start:dev-webpacker": "NODE_ENV=development concurrently \"yarn run start:rails\" \"yarn run start:webpack-dev\"",
-    "start:rails": "rails s --binding=0.0.0.0",
-    "start:webpack-dev": "WEBPACKER_DEV_SERVER_HOST=0.0.0.0 ./bin/webpack-dev-server"
+    "test": "bin/rails test -v -c"
   }
 }

@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+  body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras elementum lorem nisl, id dapibus nunc euismod vel. Integer dapibus laoreet pellentesque. Donec cursus diam id magna porttitor varius. Donec eu placerat diam. Maecenas et nisi ultricies, fringilla nulla vel, iaculis urna. Maecenas elementum bibendum libero, eget rhoncus odio blandit non."
+
+two:
+  title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+  body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras elementum lorem nisl, id dapibus nunc euismod vel. Integer dapibus laoreet pellentesque. Donec cursus diam id magna porttitor varius. Donec eu placerat diam. Maecenas et nisi ultricies, fringilla nulla vel, iaculis urna. Maecenas elementum bibendum libero, eget rhoncus odio blandit non."
