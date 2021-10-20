@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
 class Api::V1::PostsController < ApplicationController
-  before_action :set_post, only: [:show, :update, :destroy]
+  respond_to :json
+
+  before_action :set_post, only: %i[show update destroy]
+  before_action :authenticate_user!, only: %i[create update destroy]
+  before_action :check_post_owner, only: %i[update destroy]
 
   # GET /posts
   # GET /posts.json
@@ -26,7 +30,7 @@ class Api::V1::PostsController < ApplicationController
     title = params[:title]
     body = params[:body]
 
-    @post = Post.create!({ title: title, body: body })
+    @post = current_user.posts.create(title: title, body: body)
 
     if @post.save!
       json_response(@post)
@@ -68,5 +72,10 @@ class Api::V1::PostsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def post_params
     params.permit(:title, :body)
+  end
+
+  # Makes sure post is owned by current user
+  def check_post_owner
+    json_response({ error: 'Not authorized' }, :unauthorized) unless @post.user_id == current_user.id
   end
 end

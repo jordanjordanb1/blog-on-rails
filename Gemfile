@@ -41,7 +41,6 @@ group :development do
   gem 'rack-mini-profiler', '~> 2.0'
 
   gem 'solargraph'
-  gem 'rubocop'
 end
 
 group :test do
@@ -57,3 +56,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "react_on_rails", "= 12.4"
 gem 'mini_racer', platforms: :ruby
+
+gem 'devise'
+
+gem "tailwindcss-rails", "~> 0.5.1"

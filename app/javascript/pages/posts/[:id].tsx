@@ -9,18 +9,22 @@ import IconButton from '@mui/material/IconButton'
 import { styled } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
 import React, { MouseEventHandler, useState } from 'react'
+import type { User } from '../../setup'
 
 interface ViewPostByIdProps {
+  isLoggedIn: boolean
+  user: User
   post: {
     id: string
     title: string
     body: string
+    user: User
     created_at: string
     updated_at: string
   }
 }
 
-export function ViewPostById({ post }: ViewPostByIdProps) {
+export function ViewPostById({ user, post, isLoggedIn }: ViewPostByIdProps) {
   const [open, setOpen] = useState(false)
   const { execute, loading } = useDeletePost(post.id)
   const created = new Date(post.created_at)
@@ -29,6 +33,7 @@ export function ViewPostById({ post }: ViewPostByIdProps) {
   const createdTime = created.toLocaleTimeString()
   const updatedDate = updated.toLocaleDateString()
   const updatedTime = updated.toLocaleTimeString()
+  const isPostOwner = user?.id === post?.user?.id
 
   const handleDelete: MouseEventHandler = async (e) => {
     e.preventDefault()
@@ -46,11 +51,13 @@ export function ViewPostById({ post }: ViewPostByIdProps) {
 
   return (
     <>
-      <EditPostModal
-        open={open}
-        handleClose={toggleModal}
-        post={{ id: post.id, title: post.title, body: post.body }}
-      />
+      {isPostOwner && (
+        <EditPostModal
+          open={open}
+          handleClose={toggleModal}
+          post={{ id: post.id, title: post.title, body: post.body }}
+        />
+      )}
 
       <Grid container rowSpacing={4}>
         <Grid item xs={12}>
@@ -60,6 +67,10 @@ export function ViewPostById({ post }: ViewPostByIdProps) {
 
           <Typography variant="subtitle2" fontStyle="italic">
             Posted: {createdDate} @ {createdTime}
+          </Typography>
+
+          <Typography variant="subtitle2" fontStyle="italic">
+            Author: {post?.user?.name} {isPostOwner && isLoggedIn && '(you)'}
           </Typography>
         </Grid>
 
@@ -80,15 +91,19 @@ export function ViewPostById({ post }: ViewPostByIdProps) {
             </Typography>
           </Grid>
 
-          <Grid item xs={12} md="auto">
-            <IconButton onClick={toggleModal}>
-              <EditIcon />
-            </IconButton>
+          {isPostOwner && isLoggedIn && (
+            <>
+              <Grid item xs={12} md="auto">
+                <IconButton onClick={toggleModal}>
+                  <EditIcon />
+                </IconButton>
 
-            <StyledIconButton onClick={handleDelete} disabled={loading}>
-              <DeleteIcon />
-            </StyledIconButton>
-          </Grid>
+                <StyledIconButton onClick={handleDelete} disabled={loading}>
+                  <DeleteIcon />
+                </StyledIconButton>
+              </Grid>
+            </>
+          )}
         </Grid>
       </Grid>
     </>

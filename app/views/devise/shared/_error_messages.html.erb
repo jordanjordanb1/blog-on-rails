@@ -1,0 +1,15 @@
+<% if resource.errors.any? %>
+  <div class="flex w-full bg-red-300 rounded-md p-5 flex-wrap gap-3">
+    <h6 class="block w-full text-sm font-bold text-red-900">
+      <%= I18n.t("errors.messages.not_saved",
+                 count: resource.errors.count)
+       %>
+    </h6>
+
+    <div class="w-full block">
+      <% resource.errors.full_messages.reverse.each do |message| %>
+        <%= content_tag :p, message, class: "block w-full text-red-900 text-md" %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

@@ -4,7 +4,7 @@ import { ThemeProvider } from '@mui/material/styles'
 import React, { FC } from 'react'
 import type {
   RailsContext,
-  ReactComponentOrRenderFunction,
+  ReactComponentOrRenderFunction
 } from 'react-on-rails/node_package/lib/types'
 import Layout from '../layout'
 import { theme } from '../styles'
@@ -12,9 +12,25 @@ import { createEmotionCache } from '../utils'
 
 type InitOptions = Record<never, never>
 
-export function Init(App: FC<{}>, _options?: InitOptions) {
+export type User = {
+  id: string
+  name: string
+  email: string
+  created_at: string
+  updated_at: string
+}
+
+export type DefaultProps = {
+  user: User
+  isLoggedIn: boolean
+}
+
+export function Init(
+  App: FC<DefaultProps & Record<any, any>>,
+  _options?: InitOptions
+) {
   return function Renderer(
-    props: Record<any, any>,
+    props: { isLoggedIn: boolean; user: User } & Record<any, any>,
     _railsContext: RailsContext
   ) {
     const cache = createEmotionCache()
@@ -26,7 +42,7 @@ export function Init(App: FC<{}>, _options?: InitOptions) {
             <ThemeProvider theme={theme}>
               <CssBaseline />
 
-              <Layout>
+              <Layout isLoggedIn={props.isLoggedIn} user={props.user}>
                 <App {...props} />
               </Layout>
             </ThemeProvider>

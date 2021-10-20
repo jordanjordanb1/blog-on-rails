@@ -35,4 +35,4 @@ en:
       messages:
         record_invalid: "%{errors}"
   errors:
-    format: "%{message}"
+    format: "%{attribute} %{message}"
