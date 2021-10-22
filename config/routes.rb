@@ -22,8 +22,8 @@ Rails.application.routes.draw do
   root 'pages/index#index'
 
   ## Pages
-  scope :pages do
-    resources :posts, only: %i[show]
+  namespace :pages, path: '', only: :show do
+    resources :posts
   end
 
   get :register, to: redirect('/auth/register')
